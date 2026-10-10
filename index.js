@@ -28,6 +28,16 @@ app.get('/',function(req,res){
     })
 })
 
+app.post('/edit',function(req,res){
+    fs.rename(`./files/${req.body.previous}`,`./files/${req.body.new}`,function(err){
+        res.redirect("/");
+    })
+})
+
+app.get('/edit/:filename',function(req,res){
+    res.render('edit',{filename:req.params.filename});
+})
+
 app.get('/file/:filename',function(req,res){
     //we can use req.params.filename to get the filename from the url
     //utf-8 is used to read the file in text format, otherwise it will be read in binary format
